@@ -1,0 +1,27 @@
+---
+title: "Trains"
+author: "David Moberg"
+date: "10/31/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+library(googlesheets4)
+library(janitor)
+library(rstanarm)
+library(tidyverse)
+```
+
+```{r}
+sheets_deauth()
+trains <- read_sheet("1QV7o63fiZdNtMtLQfdwREapf8eYDjpfSRX0dgfNrB8A")%>%clean_names()
+summary(trains)
+sample(trains, 5, replace = FALSE)
+```
+
+```{r}
+small_trains<-trains%>%select(age, att_start)
+ggplot(small_trains, aes(x=age, y=att_start))+geom_jitter()
+
+```
